@@ -9,6 +9,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import edu.eci.arsw.CoronavirusStats.Services.CoronavirusStatsServices;
 import edu.eci.arsw.CoronavirusStats.Services.HttpConnectionService;
+import edu.eci.arsw.CoronavirusStats.cache.CoronavirusStatsCache;
 
 @Service("CoronavirusServicesImpl")
 public class CoronavirusStatsServicesImpl implements CoronavirusStatsServices{
@@ -17,9 +18,15 @@ public class CoronavirusStatsServicesImpl implements CoronavirusStatsServices{
     @Qualifier("HttpServicesImpl")
     HttpConnectionService httpServices;
 	
+	@Autowired
+	@Qualifier("CVCacheImpl")
+	 CoronavirusStatsCache CSC;
+	
 	@Override
 	public JsonNode getStatsByName(String nombre) throws UnirestException {
-		return httpServices.getStatsbyName(nombre);
+		if (!CSC.isSave(nombre)) {
+		 httpServices.getStatsbyName(nombre);}
+		return CSC.load(nombre);
 	}
 
 	@Override

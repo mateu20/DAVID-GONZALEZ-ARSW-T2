@@ -5,17 +5,19 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
 
+import com.mashape.unirest.http.JsonNode;
+
 import edu.eci.arsw.CoronavirusStats.cache.CoronavirusStatsCache;
 
 @Service("CVCacheImpl")
 public class CoronavirusStatsCacheImpl implements CoronavirusStatsCache {
 
-	HashMap<String,String> covidbyname = new  HashMap<String,String>();
-    HashMap<String,Long> covidtime = new  HashMap<String,Long>();
+	HashMap<JsonNode,JsonNode> covidbyname = new  HashMap<JsonNode,JsonNode>();
+    HashMap<JsonNode,Long> covidtime = new  HashMap<JsonNode,Long>();
     /**
      * Metodo que guarda el covid por pais en un objeto json
      */
-    public void save(String name, String json) {
+    public void save(JsonNode name, JsonNode json) {
         covidbyname.put(name, json);
         covidtime.put(name,System.currentTimeMillis());
     }
@@ -32,8 +34,8 @@ public class CoronavirusStatsCacheImpl implements CoronavirusStatsCache {
      */
     
     @Override    
-    public String load(String name) {
-        String covid19 = covidbyname.get(name);        
+    public JsonNode load(String name) {
+        JsonNode covid19 = covidbyname.get(name);        
         long timeLoad =( System.currentTimeMillis()-covidtime.get(name))/1000;        
         if (timeLoad>300){
             covidbyname.remove(name);
@@ -43,6 +45,11 @@ public class CoronavirusStatsCacheImpl implements CoronavirusStatsCache {
         return covid19;
          
     }
+	@Override
+	public void save(String name, String json) {
+		// TODO Auto-generated method stub
+		
+	}
     
 	
 	
