@@ -16,7 +16,8 @@ var CoronavirusModule = (function () {
 
 	
 	 var map;
-	 
+	 var bounds;
+     var markers = [];
 
 
 		var mapeadorPorPais = function(stats){
@@ -67,18 +68,34 @@ var CoronavirusModule = (function () {
 		}
 		
 		var mapeadorPorProvincia = function(paislocation,provincias){
-			paislocation=paislocation[0];
 			
+			
+			bounds = new google.maps.LatLngBounds();
 			
 			for (var i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
               }
 			
+			
+			markers = [];
+			bounds = new google.maps.LatLngBounds();
+			
+			paislocation=JSON.parse(paislocation);
+			paislocation=paislocation[0];
+			
+			loc=paislocation.latlng;
+			 markers.push(
+	                    new google.maps.Marker({
+	                        position: {lat: loc[0], lng: loc[1]},
+	                      map: map,
+	                      animation: google.maps.Animation.DROP
+	                    })
+	                  );
 		}
 		
 		
         var getStatsbyName = function(name){
-			alert(name);
+			
         	CoronavirusClient.getStatsByName(name,locationPais);
 		}
 		
