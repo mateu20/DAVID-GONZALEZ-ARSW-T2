@@ -1,0 +1,70 @@
+﻿﻿
+<head>
+    <title>Coronavirus</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+
+   
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+    <script src="js/CoronavirusApp.js"></script>
+    <script src="js/CoronavirusClient.js"></script>
+    <style>
+    </style>
+</head>
+
+<body onload="CoronavirusModule.initMap();CoronavirusModule.getAllStats()">
+    <header>
+        <h2>Covi-19 Coronavirus ARSW</h2>
+
+    </header>
+
+    <table id="PorPais">
+        <tr>
+            <td>Country</td>
+            <td>cantidadMuertos</td>
+            <td>cantidadInfectados</td>
+            <td>curados</td>
+        </tr>
+    </table>
+    
+
+
+    <div class="wrapper">
+	<div id="map" style="width: 450px; height: 350px;"> </div>
+	
+        <table id="ResumenPais" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <td><span>name</span></td>
+                    <td><span>birthDate </span></td>
+                    
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+		
+		<table id="PorProvincia" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+
+                    <td><span>region</span></td>
+                    <td><span>cantidadMuertos </span></td>
+                    <td><span>cantidadInfectados </span></td>
+                    <td><span>curados</span></td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+		
+	
+
+        
+
+    </div>
+</body>

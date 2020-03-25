@@ -9,4 +9,6 @@ public interface CoronavirusStatsServices {
 
 	JsonNode getAllStats()  throws UnirestException;
 
+	JsonNode getLocationByName(String nombre) throws UnirestException ;
+
 }

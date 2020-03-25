@@ -8,4 +8,6 @@ public interface HttpConnectionService {
 	JsonNode getStatsbyName(String nombre) throws UnirestException ;
 	
 	JsonNode getAllStats() throws UnirestException ;
+
+	JsonNode getLocation(String nombre) throws UnirestException ;
 }

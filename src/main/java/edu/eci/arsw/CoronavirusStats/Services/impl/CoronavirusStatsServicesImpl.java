@@ -28,4 +28,10 @@ public class CoronavirusStatsServicesImpl implements CoronavirusStatsServices{
 		return httpServices.getAllStats();
 	}
 
+	@Override
+	public JsonNode getLocationByName(String nombre) throws UnirestException {
+		
+		return httpServices.getLocation(nombre);
+	}
+
 }

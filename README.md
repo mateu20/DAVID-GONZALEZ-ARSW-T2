@@ -1,5 +1,19 @@
 # Escuela Colombiana de Ingeniería Julio Garavito - Arquitecturas de Software ARSW - Parcial Segundo Tercio
 
+## Desarrollo
+
+1. Diseño de la arquitectura: Se utilizo una arquitectura REST
+
+2. Ejecución:
+
+- mvn package
+- mvn spring-boot:run
+
+3. Como se puede exteder el diseño:
+
+- Se puede modificar la clase HttpConnectionService que es la clase que ejecuta un papel de cliente, de igual manera
+se pueden crear otros controladores y añadir funcionalidades a la capa de servicios.
+
 ## Preparación para el Parcial
 
 Con el objetivo de preparar el examen final del segundo tercio, por favor siga las siguientes instrucciones.

@@ -37,4 +37,15 @@ public class HttpConnectionServiceImpl implements HttpConnectionService{
 		return response.getBody();
 	}
 
+	@Override
+	public JsonNode getLocation(String nombre) throws UnirestException {
+		HttpResponse<JsonNode> response = Unirest
+				.get("https://restcountries-v1.p.rapidapi.com/name/"+nombre)
+				.header("x-rapidapi-host", "restcountries-v1.p.rapidapi.com")
+				.header("x-rapidapi-key", "44e05e8a84msh20cfe27fb6ce493p1e0dcdjsnb2c38f63528b")
+				.asJson();
+		
+		return response.getBody();
+	}
+
 }

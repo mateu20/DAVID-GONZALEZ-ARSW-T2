@@ -45,5 +45,17 @@ public class CoronavirusStatsController {
 	            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
 	        }
 	    }
+	 
+	 @RequestMapping(path = "/location/{name}", method = RequestMethod.GET)
+	    public ResponseEntity<?> getLocationByName(@PathVariable(name = "name") String nombre) {
+	        try {
+	           
+	            return new ResponseEntity<>(coronaservices.getLocationByName(nombre).toString(),HttpStatus.ACCEPTED);
+
+	        } catch (Exception ex) {
+	            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
+	        }
+	    }
+	 
 	
 }
