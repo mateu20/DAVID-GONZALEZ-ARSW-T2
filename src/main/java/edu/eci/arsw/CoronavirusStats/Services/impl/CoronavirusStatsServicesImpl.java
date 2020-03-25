@@ -24,9 +24,10 @@ public class CoronavirusStatsServicesImpl implements CoronavirusStatsServices{
 	
 	@Override
 	public JsonNode getStatsByName(String nombre) throws UnirestException {
-		if (!CSC.isSave(nombre)) {
-		 httpServices.getStatsbyName(nombre);}
-		return CSC.load(nombre);
+		//if (!CSC.isSave(nombre)) {
+		// httpServices.getStatsbyName(nombre);}
+		//return CSC.load(nombre);
+		return httpServices.getStatsbyName(nombre);
 	}
 
 	@Override

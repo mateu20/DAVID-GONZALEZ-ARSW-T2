@@ -30,7 +30,7 @@ CoronavirusClient= (function(){
         });
     },
     
-    getLocationByName: function(provincias,callback){
+    getLocationByName: function(name,provincias,callback){
 
         jQuery.ajax({
             url: "coronavirusstats/location/" + name ,

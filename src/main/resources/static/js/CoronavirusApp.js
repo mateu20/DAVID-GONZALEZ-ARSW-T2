@@ -62,13 +62,18 @@ var CoronavirusModule = (function () {
 		}
 		
 		var locationPais = function(provincias,name){
-			alert(name);
-        	CoronavirusClient.getLocationByName(provincias,mapeadorPorProvincia);
+			
+        	CoronavirusClient.getLocationByName(name,provincias,mapeadorPorProvincia);
 		}
 		
 		var mapeadorPorProvincia = function(paislocation,provincias){
-			alert(paislocation);
-			alert(provincias);
+			paislocation=paislocation[0];
+			
+			
+			for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+              }
+			
 		}
 		
 		
