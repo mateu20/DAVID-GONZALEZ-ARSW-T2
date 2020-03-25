@@ -16,29 +16,70 @@ var CoronavirusModule = (function () {
 
 	
 	 var map;
+	 
 
-	var mapeador = function () { }
 
 		var mapeadorPorPais = function(stats){
+				
+			$("#PorPais tbody tr").remove();
+			var paisactual="";
 			
-			 stats=JSON.parse(stats);		
-	   
-	        	   stats.map(function(country){
-	                   var contenedor = "<tr><td>"+country.data.country+"</td> <td>"+country.data.deaths+"</td> <td>"+country.data.confirmed+"</td> <td>"+country.data.recovered+"</td></tr>";     
-	                       
-	                    $("#PorPais tbody").append(contenedor);
-
-	               })
+			stats=JSON.parse(stats);
+			var paisactual=stats.data.covid19Stats[0].country;
+			stats = stats.data.covid19Stats;
+			var paises = new Map();
+			var nombres = [];
+			var muertes=0;
+			var infectados=0;
+			var recuperados=0;
+			 stats.map(function(country){
+				 
+				 if (paises.get(country.country)==undefined){
+					 nombres.push(country.country);
+					 var variables = [country.deaths,country.confirmed,country.recovered];
+					 paises.set(country.country,variables);
+				 }
+				 else{
+					 var variables = paises.get(country.country);
+					 variables[0]=variables[0]+country.deaths;
+					 variables[1]=variables[1]+country.confirmed;
+					 variables[2]=variables[2]+country.recovered;
+					 paises.set(country.country,variables);
+				 }
+				
+					 
+	         })
+	         
+	        nombres.map(function(country){
+				 
+	        		var variables = paises.get(country);
+					 var contenedor = "<tr><td onClick=\"CoronavirusModule.getStatsbyName('"+country+"')\">"+country+"</td> <td>"+variables[0]+"</td> <td>"+variables[1]+"</td> <td>"+variables[2]+"</td></tr>";     
+					 $("#PorPais tbody").append(contenedor);
+					 
+	         })
+	         
 			
 		}
-        var getStatsbyName = function(){
-			
-        	CoronavirusClient.getStatsByName(name,mapeador);
+		
+		var locationPais = function(provincias,name){
+			alert(name);
+        	CoronavirusClient.getLocationByName(provincias,mapeadorPorProvincia);
+		}
+		
+		var mapeadorPorProvincia = function(paislocation,provincias){
+			alert(paislocation);
+			alert(provincias);
+		}
+		
+		
+        var getStatsbyName = function(name){
+			alert(name);
+        	CoronavirusClient.getStatsByName(name,locationPais);
 		}
 		
 		var getAllStats= function(){
 			
-			CoronavirusClient.getStatsByName(mapeadorPorPais);
+			CoronavirusClient.getAllStats(mapeadorPorPais);
 		}
 		
 		function initMap() {
@@ -58,7 +99,8 @@ var CoronavirusModule = (function () {
 		getAllStats: getAllStats,
 		getStatsbyName: getStatsbyName,
 		mapeadorPorPais: mapeadorPorPais,
-		mapeador: mapeador
+		mapeadorPorProvincia: mapeadorPorProvincia,
+		locationPais:locationPais
 
 	};
 	

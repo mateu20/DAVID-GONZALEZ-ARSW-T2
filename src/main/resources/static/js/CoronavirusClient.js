@@ -6,7 +6,7 @@ CoronavirusClient= (function(){
             jQuery.ajax({
                 url: "coronavirusstats/" + name ,
                 success: function(result) {
-                  callback(result);
+                  callback(result,name);
                 },
                  error: function(XMLHttpRequest, textStatus, errorThrown) { 
                      alert("Nombre no encontrado");
@@ -30,12 +30,12 @@ CoronavirusClient= (function(){
         });
     },
     
-    getLocationByName: function(name,callback){
+    getLocationByName: function(provincias,callback){
 
         jQuery.ajax({
             url: "coronavirusstats/location/" + name ,
             success: function(result) {
-              callback(result);
+              callback(result,provincias);
             },
              error: function(XMLHttpRequest, textStatus, errorThrown) { 
                  alert("Nombre no encontrado");
